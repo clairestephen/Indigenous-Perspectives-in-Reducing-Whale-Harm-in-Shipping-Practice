@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indigenous Perspectives in Reducing Whale Harm in Shipping Practice</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@3.x/dist/vuetify.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.x/css/materialdesignicons.min.css" rel="stylesheet" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@3.x/dist/vuetify.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--Application Bar drop down options to link the modules together and have central navigation-->
+    <v-app>
+      <v-navigation-drawer v-model="drawer" temporary>
+        <v-list nav density="compact">
+          <v-list-item title="Home" @click="drawer = false"></v-list-item>
+          <v-list-item title="Module 1" @click="drawer = false"></v-list-item>
+          <v-list-item title="Module 2" @click="drawer = false"></v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+
+      <v-main class="pa-6">
+
+        <v-container style="position: relative">
+
+          <v-img src="images/3.png" @click="findCoordinates"></v-img>
+
+          <!-- Toggle Button, we will have 5 toggle buttons in the final app -->
+          <v-sheet v-for="item in collection" :key="item.name">
+            <v-btn icon="$vuetify" variant="tonal" style="position:absolute; z-index:1;"
+              :style="{left:item.left, top: item.top}" class="mb-4 bg-blue-grey-darken-2"
+              @click="toggleOpenCloseReferenceCard(item)">
+            </v-btn>
+
+            <!-- Reference Card (shows/hides using v-if), we will also have 5 refrence cards in the final app -->
+            <v-dialog v-model="item.showReferenceCard.value">
+              <v-card width="40%" height="40%" class="mx-auto bg-blue-grey-lighten-4">
+
+                <v-card-title>
+                  <div> 
+                    <p class = "font-weight-bold">{{ item.location }}</p>
+                  </div>
+                </v-card-title>
+
+                <v-card-text>
+                  <!--Text within the refrence card, showing details about the Indigenous group and methods of resistance-->
+                  <div><strong>Method:</strong> {{ item.method }}</div>
+                </v-card-text>
+
+                <v-img :src="item.image" @click="findCoordinates" class = "max-auto"></v-img>
+
+
+                <v-card-text>
+                  {{item.text}}
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-btn @click="toggleOpenCloseReferenceCard(item)">close</v-btn>
+                </v-card-actions>
+
+              </v-card>
+
+            </v-dialog>
+
+            <!--Automatic popup instruction card that opens when the user opens the app-->
+            <v-dialog v-model="dialog" width="500">
+              <v-card class="mx-auto bg-blue-grey-lighten-4">
+                <v-card-title>
+                  <div> 
+                    <p class = "font-weight-bold text-h5">Hello and Welcome!</p>
+                  </div>
+                 </v-card-title>
+                
+                <v-card-text>
+                  Welcome to Indigenous Perspectives in Reducing Whale Harm in Shipping Practice, in this module you will explore different methods of resistance from Indigenous communities around Canada in combatting the harmful effects of shipping practices on marine wildlife, and whales in particular. 
+                    
+                  Work your way around the map, making sure to carefully consider the ways Indigenous ways of knowing that play a role in approaching the topic of whale preservation and shipping route commerce in Canada. Feel free to stop at any time and explore the sources we provide to learn more about these important issues! 
+
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-btn @click= "dialog = false">
+                    Got it
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+  
+          </v-sheet>
+
+          <!--citation button v-btn action here-->
+          <v-btn
+            class="bg-blue-grey-darken-2"
+            style="position:absolute; left:5%; top:20%; z-index:10"
+            @click="toggleClickHere"
+            width = "180"
+            height = "40"
+            >
+            Learn More Here
+          </v-btn>
+
+          <!--citation button refrence card info here-->
+          <v-dialog v-model="clickHereDialog" width = "400" height = "200">
+            <v-card class="bg-blue-grey-lighten-4">
+            <v-card-title>
+            <p class="font-weight-bold">Learn more here!</p>
+            </v-card-title>
+              <v-card-text>
+              PUT LIST OF CITATIONS HERE WITH ASSOCIATED CARD TITLES!
+            </v-card-text>
+
+            <v-card-actions>
+            <v-btn @click="toggleClickHere">Close</v-btn>
+            </v-card-actions>
+
+          </v-card>
+          </v-dialog>
+          
+
+          <!--Application bar that will become fully functional and linked to other modules to create the collectice app-->
+          <v-app-bar class="mx-auto bg-blue-grey-darken-2">
+            <template v-slot:prepend>
+              <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+            </template>
+
+            <v-app-bar-title>Indigenous Perspectives in Reducing Whale Harm in Shipping Practices </v-app-bar-title>
+          </v-app-bar>
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
