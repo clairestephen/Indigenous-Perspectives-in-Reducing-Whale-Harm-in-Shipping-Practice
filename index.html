@@ -1,3 +1,5 @@
+<!--This section sets up the webpage and loads the external libraries needed
+for the application to run.-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +16,7 @@
 
 <body>
   <div id="app">
-    <!--Application Bar drop down options to link the modules together and have central navigation-->
+     <!--This will create a navigation drawer from the application bar that aims to link together all other modules-->
     <v-app>
       <v-navigation-drawer v-model="drawer" temporary>
         <v-list nav density="compact">
@@ -27,17 +29,17 @@
       <v-main class="pa-6">
 
         <v-container style="position: relative">
+        <!-- This allows us to find coordinates on our background image-->
+          <v-img src="images/updatemap.png" @click="findCoordinates"></v-img>
 
-          <v-img src="images/3.png" @click="findCoordinates"></v-img>
-
-          <!-- Toggle Button, we will have 5 toggle buttons in the final app -->
+           <!-- Toggle Button - This allows us to create 5 toggle buttons in the app, each linked to their own reference card -->
           <v-sheet v-for="item in collection" :key="item.name">
             <v-btn icon="$vuetify" variant="tonal" style="position:absolute; z-index:1;"
               :style="{left:item.left, top: item.top}" class="mb-4 bg-blue-grey-darken-2"
               @click="toggleOpenCloseReferenceCard(item)">
             </v-btn>
 
-            <!-- Reference Card (shows/hides using v-if), we will also have 5 refrence cards in the final app -->
+            <!-- Reference Card (shows/hides using v-if) - This allows us to have 5 refrence cards in the app, one for each button -->
             <v-dialog v-model="item.showReferenceCard.value">
               <v-card width="40%" height="40%" class="mx-auto bg-blue-grey-lighten-4">
 
@@ -48,7 +50,7 @@
                 </v-card-title>
 
                 <v-card-text>
-                  <!--Text within the refrence card, showing details about the Indigenous group and methods of resistance-->
+                  <!--Text within the refrence card, showing details about the Indigenous group, perspectives, and methods of resistance-->
                   <div><strong>Method:</strong> {{ item.method }}</div>
                 </v-card-text>
 
@@ -77,12 +79,12 @@
                  </v-card-title>
                 
                 <v-card-text>
-                  Welcome to Indigenous Perspectives in Reducing Whale Harm in Shipping Practice, in this module you will explore different methods of resistance from Indigenous communities around Canada in combatting the harmful effects of shipping practices on marine wildlife, and whales in particular. 
+                  Welcome to Indigenous Perspectives in Reducing Whale Harm in Shipping Practice, in this module you will explore different methods of resistance from Indigenous communities around Canada in combatting the harmful effects of shipping practices on marine wildlife, whales in particular. 
                     
-                  Work your way around the map, making sure to carefully consider the ways Indigenous ways of knowing that play a role in approaching the topic of whale preservation and shipping route commerce in Canada. Feel free to stop at any time and explore the sources we provide to learn more about these important issues! 
+                  Work your way around the map, making sure to carefully consider the Indigenous ways of knowing that play a role in approaching the topic of whale preservation within coastal shipping routes in Canada. Feel free to explore the sources provided in the 'Learn More Here' page and engage more with Indigenous marine stewardship across Canada's coast! 
 
                 </v-card-text>
-
+                  <!--This adds a way to exit the dialoge-->
                 <v-card-actions>
                   <v-btn @click= "dialog = false">
                     Got it
@@ -90,10 +92,10 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-  
+        
           </v-sheet>
 
-          <!--citation button v-btn action here-->
+          <!--This creates the 'Learn More Here' button that displays a card with further information and links to sources-->
           <v-btn
             class="bg-blue-grey-darken-2"
             style="position:absolute; left:5%; top:20%; z-index:10"
@@ -104,16 +106,113 @@
             Learn More Here
           </v-btn>
 
-          <!--citation button refrence card info here-->
-          <v-dialog v-model="clickHereDialog" width = "400" height = "200">
+          <!--This creates the card that will pop up with additional information and sources-->
+          <v-dialog v-model="clickHereDialog" width="500">
             <v-card class="bg-blue-grey-lighten-4">
             <v-card-title>
-            <p class="font-weight-bold">Learn more here!</p>
+            <p class="font-weight-bold">Learn More Here</p>
             </v-card-title>
               <v-card-text>
-              PUT LIST OF CITATIONS HERE WITH ASSOCIATED CARD TITLES!
-            </v-card-text>
+             <v-card-text>
 
+              <h2>References</h2>  <!--The h2 function creates a heading level 2 for the references title -->
+
+              <h3>Gitga’at First Nation, British Columbia</h3> <!--Used heading level 3 for the section titles that correspond with each reference card -->
+                <p><strong>Hydrophones and Alternate Routing</strong></p> <!--Used p function to indicate a regular block of text (paragraph). Using the strong function will make this bold to identify the method that these citations relate to.-->
+
+                <ul> <!--The unordered list function can be used to create bullet points so that the citations are easier to view for the user-->
+                 <li> <!--The list function is used inside the unordered list function to represent each item. This is where we list the citations for each section.-->
+                 Clear Seas.(https://clearseas.org/insights/traditional-waters-modern-threats-the-gitgaats-fight-for-humpbacks/)
+                   Traditional Waters, Modern Threats
+                 </a>
+                </li>
+
+                 <li>
+                    Keen, E., O’Mahony, É., Nichol, L., Wright, B., Shine, C., Hendricks, B., Meuter, H., 
+                    Alidina, H., & Wray, J. (2023). Ship-strike forecast and mitigation for whales in 
+                    Gitga’at First Nation territory. <i>Endangered Species Research</i>, 51, 31–58. (https://doi.org/10.3354/esr01244) <!--The italics function is used to italicize the article name-->
+                   </li>
+                  </ul>
+
+
+              <h3>Malahat Nation, British Columbia</h3>
+                <p><strong>Underwater Hydrophone Stations</strong></p>
+
+                <ul>
+                <li>
+                  Clear Seas.(https://clearseas.org/insights/mitigating-underwater-noise-with-indigenous-knowledge/)
+                   Mitigating Underwater Noise with Indigenous Knowledge
+                 </a>
+                 </li>
+
+                <li>
+                 Hendricks, B., Pine, M. K., Baer, G., Welton, M., Symonds, H. K., Dakin, D. T., 
+                 Alidina, H. M., Picard, C. R., & Wray, J. (2025). Quantifying vessel noise and 
+                 acoustic habitat loss in marine soundscapes. <i>Marine Pollution Bulletin</i>, 219, 118150. (https://doi.org/10.1016/j.marpolbul.2025.118150)
+                </li>
+                </ul>
+
+
+              <h3>Essipit Innu First Nation, Quebec</h3>
+                <p><strong>Speed Reduction Areas</strong></p>
+
+              <ul>
+              <li>
+                Government of Canada (https://tc.canada.ca/en/campaigns/protecting-our-coasts-oceans-protection-plan/stronger-partnerships-indigenous-coastal-communities/expanding-enhanced-maritime-situational-awareness-program)
+                 Oceans Protection Plan
+                </a>
+              </li>
+
+               <li>
+                 Chion, C., Lagrois, D., Dupras, J., Turgeon, S., McQuinn, I. H., Michaud, R., 
+                 Ménard, N., & Parrott, L. (2017). Underwater acoustic impacts of shipping 
+                 management measures. <i>Ecological Modelling</i>, 354, 72–87. (https://doi.org/10.1016/j.ecolmodel.2017.03.014)
+              </li>
+             </ul>
+
+
+            <h3>Paulatuk, Gjoa Haven, and Resolute Inuit Communities</h3>
+              <p><strong>Low Impact Shipping Corridors</strong></p>
+
+              <ul>
+              <li>
+               Canadian Geographic. (https://canadiangeographic.ca/articles/inuit-communities-consulted-in-plans-for-low-impact-arctic-shipping-routes/)
+                Inuit Communities Consulted in Plans for Low Impact Shipping Routes
+                 </a>
+              </li>
+
+              <li>
+              Dawson, J., Carter, N., van Luijk, N., Parker, C., Weber, M., Cook, A., Grey, K., 
+             & Provencher, J. (2020). Infusing Inuit and local knowledge into the Low Impact 
+             Shipping Corridors. <i>Environmental Science & Policy</i>, 105, 19–36. (https://doi.org/10.1016/j.envsci.2019.11.013)
+               </li>
+            </ul> 
+
+
+            <h3>Indigenous Marine Stewardship in Canadian Shipping Routes</h3>
+
+            <ul>
+             <li>
+             Arctic WWF. (https://www.arcticwwf.org/the-circle/stories/giving-whales-the-right-of-way-over-ships/)
+              Giving Whales the Right of Way
+             </a>
+            </li>
+
+            <li>
+             Coastal First Nations. (https://coastalfirstnations.ca/initiatives/marine-response-and-shipping-safety/)
+             Marine Response and Shipping Safety
+              </a>
+             </li>
+
+              <li>
+               Iravani, R., Biagi, M., Laforest, S., Lee, K., Isaacman, L., Chen, Z., & An, C. (2025).
+                Protecting shorelines in Canadian Indigenous communities. 
+              <i>Marine Pollution Bulletin</i>, 219, 118310. (https://doi.org/10.1016/j.marpolbul.2025.118310)
+             </li>
+            </ul>
+
+            </v-card-text>
+            <!--Close button-->
             <v-card-actions>
             <v-btn @click="toggleClickHere">Close</v-btn>
             </v-card-actions>
